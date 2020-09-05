@@ -7,13 +7,9 @@
 
 const randomNumbers = [10, 30, 15, 25, 50, 40, 5]
 
-const oddRandomNumbers = randomNumbers.filter(number => {
-    if (number % 2 != 0) {
-        return true
-    }
-})
+const oddNumbers = randomNumbers.filter(number => number % 2 === 1)
 
-console.log('Odd numbers: ', oddRandomNumbers)
+console.log('Odd numbers: ', oddNumbers)
 
 /*
   02
@@ -23,7 +19,7 @@ console.log('Odd numbers: ', oddRandomNumbers)
 
 const crazyNumbers = [937, 5, 395, 402, 501, 333, 502, 781, 3, 691]
 
-const qntNumbersLessThan501 = crazyNumbers.reduce((acc, number) => {
+const qtyNumbersLessThan501 = crazyNumbers.reduce((acc, number) => {
     if (number < 501) {
         acc += 1
     }
@@ -31,7 +27,7 @@ const qntNumbersLessThan501 = crazyNumbers.reduce((acc, number) => {
     return acc
 }, 0)
 
-console.log('Quantity of numbers below 501: ', qntNumbersLessThan501)
+console.log('Quantity of numbers below 501: ', qtyNumbersLessThan501)
 
 /*
   03
@@ -42,7 +38,7 @@ console.log('Quantity of numbers below 501: ', qntNumbersLessThan501)
 
 const numbers = [5, 7, 3]
 
-const squaredNumbers = numbers.map(number => number * number)
+const squaredNumbers = numbers.map(number => number ** 2)
 
 console.log('Squared numbers: ', squaredNumbers)
 
@@ -67,19 +63,15 @@ const tarantinoMovies = [
     { name: 'Kill Bill: Volume 1', release: 2003 }
 ]
 
-const tarantinoMoviesBefore2000 = tarantinoMovies.filter(movie => {
-    if (movie.release < 2000) {
-        return true
-    }
-})
+const tarantinoMoviesBefore2000 = tarantinoMovies.filter(movie => movie.release < 2000)
 
 console.log('Tarantino movies released before 2000: ', tarantinoMoviesBefore2000)
 
 /*
   05
 
-  - Gere um novo array que contém apenas os nomes das séries abaixo;
-  - Exiba o novo array no console.    
+  - Gere uma lista array que contém apenas os nomes das séries abaixo com menos de 10 caracteres;
+  - Exiba a lista no console.    
 */
 
 const tvShows = [
@@ -91,6 +83,16 @@ const tvShows = [
     { name: 'House M.D.', releaseYear: 2004 },
     { name: 'Watchmen', releaseYear: 2019 }
 ]
+
+const seriesNames = tvShows
+    .map(serie => serie.name)
+    .filter(serie => serie.length >= 10)
+    .reduce((acc, serie) => {
+        acc += `\n- ${serie}`
+        return acc
+    }, '')
+
+console.log('\n Series you have to watch:', seriesNames)
 
 /*
   06
@@ -116,3 +118,10 @@ const cart = [
   - Nome 2
   - Nome 3
 */
+
+const gamesNames = cart.reduce((acc, game) => {
+    acc += `\n- ${game.name}`
+    return acc
+}, '')
+
+console.log('\n Games you must play:', gamesNames)
