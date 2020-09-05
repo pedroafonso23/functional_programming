@@ -7,7 +7,9 @@
 
 const randomNumbers = [10, 30, 15, 25, 50, 40, 5]
 
-const oddNumbers = randomNumbers.filter(number => number % 2 === 1)
+const getOddNumbers = number => number % 2 === 1
+
+const oddNumbers = randomNumbers.filter(getOddNumbers)
 
 console.log('Odd numbers: ', oddNumbers)
 
@@ -19,13 +21,9 @@ console.log('Odd numbers: ', oddNumbers)
 
 const crazyNumbers = [937, 5, 395, 402, 501, 333, 502, 781, 3, 691]
 
-const qtyNumbersLessThan501 = crazyNumbers.reduce((acc, number) => {
-    if (number < 501) {
-        acc += 1
-    }
+const countNumbersLessThan501 = (acc, number) => number < 501 ? ++acc : acc
 
-    return acc
-}, 0)
+const qtyNumbersLessThan501 = crazyNumbers.reduce(countNumbersLessThan501, 0)
 
 console.log('Quantity of numbers below 501: ', qtyNumbersLessThan501)
 
@@ -63,7 +61,7 @@ const tarantinoMovies = [
     { name: 'Kill Bill: Volume 1', release: 2003 }
 ]
 
-const tarantinoMoviesBefore2000 = tarantinoMovies.filter(movie => movie.release < 2000)
+const tarantinoMoviesBefore2000 = tarantinoMovies.filter(({ release }) => release < 2000)
 
 console.log('Tarantino movies released before 2000: ', tarantinoMoviesBefore2000)
 
@@ -85,12 +83,9 @@ const tvShows = [
 ]
 
 const seriesNames = tvShows
-    .map(serie => serie.name)
+    .map(({ name }) => name)
     .filter(serie => serie.length >= 10)
-    .reduce((acc, serie) => {
-        acc += `\n- ${serie}`
-        return acc
-    }, '')
+    .reduce((acc, serie) => `${acc}\n- ${serie}`, '')
 
 console.log('\n Series you have to watch:', seriesNames)
 
@@ -119,9 +114,6 @@ const cart = [
   - Nome 3
 */
 
-const gamesNames = cart.reduce((acc, game) => {
-    acc += `\n- ${game.name}`
-    return acc
-}, '')
+const gamesNames = cart.reduce((acc, { name }) => `${acc}\n- ${name}`, '')
 
 console.log('\n Games you must play:', gamesNames)
